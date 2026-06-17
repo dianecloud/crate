@@ -217,8 +217,6 @@ public class SQLExceptions {
         } else if (unwrappedError instanceof InvalidIndexTemplateException) {
             PartitionName partitionName = PartitionName.fromIndexOrTemplate(((InvalidIndexTemplateException) unwrappedError).name());
             return new InvalidRelationName(partitionName.relationName().fqn(), unwrappedError);
-        } else if (unwrappedError instanceof IndexNotFoundException) {
-            return new RelationUnknown(((IndexNotFoundException) unwrappedError).getIndex().getName(), unwrappedError);
         } else if (unwrappedError instanceof InterruptedException) {
             return JobKilledException.of(unwrappedError.getMessage());
         }
